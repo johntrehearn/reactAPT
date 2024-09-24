@@ -30,9 +30,17 @@ const Home = () => {
     {title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3},
   ]);
 
+  // The method below using an arrow function to filter the blogs array to only show blogs by Mario. This filter method fires a callback function for each item in the array. Now if we return true for that item it will be kept in the new array, if we return false it will be removed. IT RETURNS A NEW ARRAY with only the truthey values. i.e. the blogs by Mario. WE ARE THEN PASSING THIS DATA IN AS A PROP TO THE BLOGLIST COMPONENT.
+
+  // we take in the blog as an argument and return true or false blogs={blogs.filter((blog) => blog.author === 'mario')}
+
   return (
     <div className="home">
       <BlogList blogs={blogs} title="All Blogs" />
+      <BlogList
+        blogs={blogs.filter((blog) => blog.author === 'mario')}
+        title="Mario's Blogs"
+      />
     </div>
   );
 };
