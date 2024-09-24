@@ -1,4 +1,4 @@
-import {useState, useEffect, version} from 'react';
+import {useState, useEffect} from 'react';
 import BlogList from './BlogList';
 
 // to give BlogList.js access to the blogs we could redefine the blogs in the BlogsList component OR we could pass it as a prop to BlogList.js
@@ -24,14 +24,11 @@ import BlogList from './BlogList';
 // so in BlogList.js we can access the blogs array by using const blogs = props.blogs;
 
 const Home = () => {
-  // old blogs data
-  // const [blogs, setBlogs] = useState([
-  //   {title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1},
-  //   {title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2},
-  //   {title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3},
-  // ]);
-
-  const [blogs, setBlogs] = useState(null);
+  const [blogs, setBlogs] = useState([
+    {title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1},
+    {title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2},
+    {title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3},
+  ]);
 
   // The method below using an arrow function to filter the blogs array to only show blogs by Mario. This filter method fires a callback function for each item in the array. Now if we return true for that item it will be kept in the new array, if we return false it will be removed. IT RETURNS A NEW ARRAY with only the truthey values. i.e. the blogs by Mario. WE ARE THEN PASSING THIS DATA IN AS A PROP TO THE BLOGLIST COMPONENT.
 
@@ -54,37 +51,18 @@ const Home = () => {
 
   // ONE THING TO BE CAREFUL OF is changing the state inside of a useEffect. If we do this it will cause an infinite loop. This is because changing the state causes a re-render and useEffect runs on every render. So if we change the state inside of useEffect it will cause a re-render and useEffect will run again and so on. This is why we pass an empty array as the second argument to useEffect. This will only run the effect on the first render of the component.
 
-  // Old version
-
-  // useEffect(() => {
-  //   console.log('use effect ran');
-  //   console.log(blogs);
-  // }, [blogs]);
-
   useEffect(() => {
-    fetch('http://localhost:8000/blogs')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setBlogs(data);
-      });
-  }, []);
-
-  // to run json web server make data folder in root and db.json file with some data in it run json-server npx json-server --watch data/db.json --port 8000
+    console.log('use effect ran');
+    console.log(blogs);
+  }, [blogs]);
 
   return (
     <div className="home">
-      {blogs && (
-        <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
-      )}
-      {blogs && (
-        <BlogList
-          blogs={blogs.filter((blog) => blog.author === 'mario')}
-          title="Mario's Blogs"
-        />
-      )}
+      <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
+      <BlogList
+        blogs={blogs.filter((blog) => blog.author === 'mario')}
+        title="Mario's Blogs"
+      />
     </div>
   );
 };
