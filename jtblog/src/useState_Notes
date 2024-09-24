@@ -1,0 +1,35 @@
+If we update the name in handleclick then the new name will not display on the page as react is not looking for changes. i.e. the value is not reactive
+
+To make it change, i.e. reactive we use a hook to make React see that and re-render the template on the page
+
+The hook is called useState
+
+A hook in react is a special type of function that does a certain job.
+
+The useState hook gives us a way to make a value reactive and therefore change the value when it is updated.
+
+First thing we need to do is import it at the top of the file.
+
+Destructuring is a JavaScript feature that allows you to unpack values from arrays or properties from objects into distinct variables. In React, destructuring is often used to extract values from props or state.
+
+NB useState IS A FUNCTION
+
+useState('mario')
+
+useState is a function. In the above we call usestate and and envoke it with ().
+
+We give it an initial value of mario
+
+useState('Mario');
+
+We want to store this in some kind of value as at the minute we are just calling it using Mario as one of the parameters. So to do this we use const
+
+const [] = useState('mario');
+
+the [] is using array distructing to grab two value that the useState hook returns the first value is the inital value (which we can call what we want) i.e. name and the second value is a function that we can use to change that value. Convention is normally set and whatever you call the first value so setName.
+
+The value is now REACTIVE so it will re-render when it updates and change in the template aswell.
+
+So when we use setName that triggers react to re-render the element that it is attached to.
+
+The object in usestate can be anything such array, object, boolean or a number. It really does not matter the data type that we are using.

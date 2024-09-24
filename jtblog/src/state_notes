@@ -1,0 +1,3 @@
+State: When we talk about state of a component we just mean the data being used by that component at THAT POINT IN TIME
+
+That state could be an array of values, booleans, strings, object or any other data that our object uses.
