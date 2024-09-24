@@ -2,7 +2,11 @@ const handleClick = () => {
   console.log('Button clicked');
 };
 
-const handleClickAgain = (name) => {
+const handleClickAgain = () => {
+  console.log('Hello from handleClickAgain');
+};
+
+const handleClickAgainAgain = (name) => {
   console.log('Hello ' + name);
 };
 
@@ -13,7 +17,14 @@ const Home = () => {
       <button onClick={handleClick}>Click me</button>
       <button
         onClick={() => {
-          console.log('Hello');
+          handleClickAgain();
+        }}
+      >
+        Annon Function
+      </button>
+      <button
+        onClick={() => {
+          handleClickAgainAgain('mario');
         }}
       >
         Click Me Again
