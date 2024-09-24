@@ -34,9 +34,16 @@ const Home = () => {
 
   // we take in the blog as an argument and return true or false blogs={blogs.filter((blog) => blog.author === 'mario')}
 
+  const handleDelete = (id) => {
+    const newBlogs = blogs.filter((blog) => blog.id !== id);
+    setBlogs(newBlogs);
+  };
+
+  // handleDelete is defined in here as the data is initialised in here and this is where the state is. So we want to use the setBlog method here component to edit the state and THEN PASS THIS THROUGH AS A PROP TO THE BLOGLIST COMPONENT. i.e. pass handleDelete through as a prop to the BlogList component as you can pass functions as props handleDetete={handleDelete} is passing the prop through to the BlogList.js componenent it need to be accepted in the destructed top of const BlogList = ({blogs, title, handleDelete}) => { ... } so we can use it.
+
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="All Blogs" />
+      <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
       <BlogList
         blogs={blogs.filter((blog) => blog.author === 'mario')}
         title="Mario's Blogs"

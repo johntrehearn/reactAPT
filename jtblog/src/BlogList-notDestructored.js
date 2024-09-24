@@ -10,9 +10,9 @@
 
 // if we log it to the console we can see the array of blogs
 
-const BlogList = ({blogs, title}) => {
-  // const blogs = props.blogs;
-  // const title = props.title;
+const BlogList = (props) => {
+  const blogs = props.blogs;
+  const title = props.title;
 
   console.log(props, blogs);
 
