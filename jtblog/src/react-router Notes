@@ -1,0 +1,59 @@
+to install react-router use the following as it does not come with the normal bundle:
+
+    npm i react-router-dom@5
+
+    Then we need to import some things into the App.js.
+
+    We destructure them so we can use them using this name i.e. BrowserRouter or i.e. Router or i.e. Switch inside this file
+
+    import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+    Then we need to surround the entire application with the router componenent so we can use the router component in the entire application.
+    i.e. all components that are nested inside of the the App.js component so all componenents have access to the router.
+
+    The next thing is to decide to where we want out page content to go when we go to different pages. We want it to go inside this <div> with a class of content
+
+    <div className="content">
+
+    so we delete the <Home> component
+
+       <Home />
+
+    and replace it with the <Switch> component
+
+    The switch component makes sure that only one route is shown at any one time.
+
+    For now all our routes go inside this switch component.
+
+    Then we add our individual routes - so we create a route for each page that we have using the Route compoonent we destructured above.
+
+    i.e. a route with a property of the path that the route uses so for home "/".
+
+    It is the bit after co.uk ONLY  .../home
+
+     <Route path='/'>
+
+    </Route>
+
+    Then put the component in the middle
+
+    <Route path='/'>
+        <Home />
+    </Route>
+
+    To stop it matching if the first bit is included in the route we added exact prop
+
+     <Switch>
+        <Route exact path="/">
+            <Home />
+        </Route>
+        <Route path="/create">
+            <Create />
+        </Route>
+    </Switch>
+
+    THE SWITCH COMPONENT
+    REACT LOOKS FOR THE FIRST MATCH AND RENDERS THAT THEN STOPS if you don't use switch then it would carry on and render any other matches as well.
+
+    The way it is setup then the next page is requested from the server. To stop it doing this and make it handle in the broswer like React
+    should we need to use react router <Link> instead rather than <a> tags
