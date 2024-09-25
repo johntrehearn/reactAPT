@@ -4,6 +4,7 @@ import BlogList from './BlogList';
 const Home = () => {
   const [blogs, setBlogs] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -20,7 +21,7 @@ const Home = () => {
           setIsLoading(false);
         })
         .catch((err) => {
-          console.log(err.message);
+          setError(err.message);
         });
     }, 1000);
   }, []);
@@ -28,6 +29,7 @@ const Home = () => {
   return (
     <div className="home">
       {isLoading && <div>Loading...</div>}
+      {error && <div>{error}</div>}
       {blogs && <BlogList blogs={blogs} title="All Blogs" />}
       {blogs && (
         <BlogList
