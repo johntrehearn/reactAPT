@@ -19,8 +19,10 @@ const Home = () => {
           console.log(data);
           setBlogs(data);
           setIsLoading(false);
+          setError(null);
         })
         .catch((err) => {
+          setIsLoading(false);
           setError(err.message);
         });
     }, 1000);
