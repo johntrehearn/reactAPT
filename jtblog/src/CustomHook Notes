@@ -1,0 +1,56 @@
+Custom Hooks
+
+When we do something by externalising the logic into its own file that is CREATING A CUSTOM HOOK.
+
+A hook is its own custom functionality that does something i.e. does something specific.
+
+When we move the logic to its own file we need to create a function to put the code in and this function will be the hook itself.
+
+CUSTOM HOOKS in React need to start with the word USE(in lower case)
+
+We need to create a function to put the code in (as above)
+
+We need to import useState useEffect (as we are using it in the fetch) from React
+
+We need to register ALL OF THE STATES ASWELL as currently all the states are registered in Home.js but we are not setting the state there anymore we are setting the state in the new custom hook so we need them in there.
+
+    i.e. import {useState, useEffect} from 'react';
+
+THEN WE NEED TO EXPORT THE FUNCTION AT THE END OF THE FILE. i.e.
+
+    export default useFetch;
+
+We then need to return some values from the hook. So we to return them.
+
+At the bottom we are going to return three values.
+
+NB the return value can be anything you want it could be an array (like in useState) it could be a boolean or a string. In our case it is an array (with the data in it), isLoading, error
+
+Because when we use this hook useFetch inside another file in the future we want to be able to grab those properties from the hook i.e. this is what you want to get
+
+So in our case we
+
+    return {data, isLoading, error}
+
+The last thing we want to do is pass in the endpoint of the URL rather than hardcode it here as then it is not really reusable.
+
+So we need to pass the URL to the function when we call it.
+
+We also need to add it as a dependance to useEffect so it re-renders every time the url changes.
+
+We then need to import the useFetch hook into our home component. When we do this we want to destructure the three bits of data /properties we get back from useFetch so we can use them. We do this using:
+
+const {data: blogs, isLoading, error} = useFetch('http://localhost:8000/blogs');
+
+Make sure you CLICK ON IT SO IT IMPORTS AUTOMATICALLY or otherwise you have to add the import.
+
+We can add this
+
+const {data: blogs, isLoading, error} = useFetch('http://localhost:8000/blogs');
+
+which says grab the data but call it blogs in this context. so it works in this bit
+
+<BlogList
+blogs={blogs.filter((blog) => blog.author === 'mario')}
+title="Mario's Blogs"
+/>
